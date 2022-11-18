@@ -1,0 +1,40 @@
+.main-container
+  @apply mx-auto xl:container
+
+.home
+  &-wrapper
+    @apply flex pt-[30px] pb-[30px] justify-between h-screen
+  &__meeting
+    @apply w-3/4 flex flex-col h-[100%] justify-between mr-[30px]
+    &-content
+      @apply w-[100%] h-5/6 mt-[30px] grid grid-cols-2 gap-8
+    &-buttons
+      @apply w-[100%] min-h-[60px] flex justify-center
+  &__content-active
+    @apply border-2 border-[#1ae5d6]
+  &__content-participant
+    @apply w-[100%] h-[100%] bg-[#1f272f] rounded-3xl
+  &-chat
+    @apply w-1/4 bg-[#1f272f] h-[100%] rounded-3xl
+  &-title
+    @apply text-3xl font-bold text-white mr-5
+  &__title-icon
+    @apply flex items-center rounded-full bg-[#1ae5d6] pl-[15px] pr-[15px] h-[40px] font-semibold text-sm
+    svg
+      @apply w-[22px] h-[22px] mr-[5px]
+  &__wrap-title
+    @apply flex items-center
+  &__details
+    @apply mt-[30px] text-base flex justify-between items-center
+    &-invite
+      @apply flex items-center text-[#1ae5d6] font-semibold cursor-pointer select-none
+      span
+        @apply flex justify-center items-center text-black w-[30px] h-[30px] mr-2 rounded-lg bg-[#1ae5d6] text-xl
+    &-time
+      @apply flex items-center text-[#e36a6d] font-semibold border-2 border-[#e36a6d] rounded-full p-4 pt-2 pb-2 justify-around text-sm
+      svg
+        @apply w-[7px] h-[7px] mr-[5px]
+    &-leave
+      @apply flex items-center text-white font-semibold border-2 border-white rounded-full p-4 pt-2 pb-2 justify-around text-sm mr-[20px] cursor-pointer
+      svg
+        @apply w-[17px] h-[17px] mr-[10px] rotate-[135deg]
