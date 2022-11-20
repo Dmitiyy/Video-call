@@ -1,21 +1,17 @@
 .main-container
-  @apply mx-auto xl:container
+  @apply mx-auto xl:container pt-[30px] pb-[30px]
 
 .home
-  &-wrapper
-    @apply flex pt-[30px] pb-[30px] justify-between h-screen
   &__meeting
-    @apply w-3/4 flex flex-col h-[100%] justify-between mr-[30px]
+    @apply h-[100%] justify-between mr-[30px]
     &-content
-      @apply w-[100%] h-5/6 mt-[30px] grid grid-cols-2 gap-8
-    &-buttons
-      @apply w-[100%] min-h-[60px] flex justify-center
+      @apply w-[100%] mt-[30px] grid grid-cols-2 h-auto gap-8 items-center
   &__content-active
-    @apply border-2 border-[#1ae5d6]
+    @apply border-2 border-[#1ae5d6] shadow-[0px_0px_27px_-11px_rgba(26,229,214,1)]
   &__content-participant
-    @apply w-[100%] h-[100%] bg-[#1f272f] rounded-3xl
-  &-chat
-    @apply w-1/4 bg-[#1f272f] h-[100%] rounded-3xl
+    @apply bg-[#1f272f] rounded-3xl overflow-hidden flex items-center min-h-[400px] relative
+    .home__participant-actions
+      @apply absolute top-0 left-0 w-[100%] h-[100%] bg-[#00000040]
   &-title
     @apply text-3xl font-bold text-white mr-5
   &__title-icon
