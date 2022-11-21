@@ -1,0 +1,23 @@
+.home
+  &__meeting
+    @apply h-[100%] justify-between
+    &-content
+      @apply w-[100%] mt-[30px] grid grid-cols-2 h-auto gap-8 items-center
+  &__content-active
+    @apply border-2 border-[#1ae5d6] shadow-[0px_0px_27px_-11px_rgba(26,229,214,1)]
+  &__content-participant
+    @apply bg-[#1f272f] rounded-3xl flex items-center relative p-2 overflow-hidden
+    .video
+      @apply absolute top-0 left-0 h-[100%]
+    .home__participant-actions
+      @apply top-0 left-0 w-[100%] lg:h-[400px] z-40 flex flex-col justify-between
+      .home__participant-settings
+        @apply w-[50px] h-[50px] bg-[#2b2a2f51] rounded-xl cursor-pointer flex justify-center items-center mt-[20px] ml-[20px]
+      .home__participant-name
+        @apply flex justify-end mr-[20px] mb-[20px]
+        span
+          @apply p-3 bg-[#2b2a2f51] rounded-xl text-white
+      .home__participant-profile
+        @apply w-[100px] h-[100px] bg-[#2b2a2f51] rounded-full flex justify-center items-center m-auto
+        svg
+          @apply w-[50px]

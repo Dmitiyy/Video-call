@@ -1,29 +1,9 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import Participant from '../components/Participant';
 import './home.sass';
 
 export default function Home() {
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: {
-          facingMode: 'user',
-          width: { min: 640, ideal: 1280, max: 1920 },
-          height: { min: 480, ideal: 720 }
-        }
-      })
-      .then(stream => {
-        let video: any = videoRef.current;
-        video.srcObject = stream;
-      })
-      .catch(err => {
-        console.error("error:", err);
-      });
-  }, [videoRef]);
-
   return (
     <div className="main-container font-Montserrat">
       <div className="home__meeting">
@@ -61,13 +41,8 @@ export default function Home() {
           </div>
         </div>
         <div className="home__meeting-content">
-          <div className="home__content-participant home__content-active">
-            <div className="home__participant-actions">
-
-            </div>
-            <video ref={videoRef} autoPlay playsInline controls={false} />
-          </div>
-          <div className="home__content-participant h-[500px]"></div>
+          <Participant />
+          <div className="home__content-participant"></div>
           <div className="home__content-participant"></div>
           <div className="home__content-participant"></div>
         </div>
