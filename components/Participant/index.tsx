@@ -1,30 +1,43 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
+import classNames from 'classnames';
 import './styles.sass';
 
-const Participant = () => {
+interface IProps { active?: boolean };
+
+const Participant: FC<IProps> = ({ active }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: {
-          width: { min: 640, ideal: 1280, max: 1920 },
-          height: { min: 480, ideal: 720 }
-        }
-      })
-      .then(stream => {
-        let video: any = videoRef.current;
-        video.srcObject = stream;
-      })
-      .catch(err => {
-        console.error("error:", err);
-      });
+    const controller = new AbortController();
+
+    if (active) {
+      navigator.mediaDevices
+        .getUserMedia({
+          video: {
+            width: { min: 640, ideal: 1280, max: 1920 },
+            height: { min: 480, ideal: 720 }
+          }
+        })
+        .then(stream => {
+          let video: any = videoRef.current;
+          video.srcObject = stream;
+        })
+        .catch(err => {
+          console.error("error:", err);
+        });
+    }
+
+    return () => controller.abort();
   }, [videoRef]);
 
   return (
-    <div className="home__content-participant home__content-active">
+    <div
+      className={
+        classNames("home__content-participant", { 'home__content-active': active })
+      }
+    >
       <div className="home__participant-actions">
         <div className="home__participant-settings">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -33,7 +46,7 @@ const Participant = () => {
             </g>
           </svg>
         </div>
-        <div className="home__participant-profile opacity-0">
+        <div className={classNames("home__participant-profile", { "opacity-0": active, "h-0": active })}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path fill="white" d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z" />
           </svg>
@@ -43,7 +56,11 @@ const Participant = () => {
         </div>
       </div>
       <div className="video flex items-center">
-        <video ref={videoRef} autoPlay playsInline controls={false} />
+        {
+          active && (
+            <video ref={videoRef} autoPlay playsInline controls={false} />
+          )
+        }
       </div>
     </div>
   )

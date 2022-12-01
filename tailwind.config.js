@@ -8,6 +8,10 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'xs': '300px',
+      ...defaultTheme.screens
+    },
     extend: {
       fontFamily: {
         'Montserrat': ['Montserrat']
