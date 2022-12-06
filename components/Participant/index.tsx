@@ -2,35 +2,24 @@
 
 import { FC, useEffect, useRef } from 'react';
 import classNames from 'classnames';
+import { useLocalMedia } from '../../hooks/useLocalMedia';
 import './styles.sass';
 
 interface IProps { active?: boolean };
 
 const Participant: FC<IProps> = ({ active }) => {
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { localStream, loading: loadingMedia, error: errorMedia } = useLocalMedia();
 
   useEffect(() => {
     const controller = new AbortController();
 
-    if (active) {
-      navigator.mediaDevices
-        .getUserMedia({
-          video: {
-            width: { min: 640, ideal: 1280, max: 1920 },
-            height: { min: 480, ideal: 720 }
-          }
-        })
-        .then(stream => {
-          let video: any = videoRef.current;
-          video.srcObject = stream;
-        })
-        .catch(err => {
-          console.error("error:", err);
-        });
+    if (!errorMedia && !loadingMedia && videoRef.current && localStream) {
+      videoRef.current.srcObject = localStream;
     }
 
     return () => controller.abort();
-  }, [videoRef]);
+  }, [videoRef, loadingMedia, errorMedia]);
 
   return (
     <div
